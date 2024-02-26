@@ -37,8 +37,8 @@ extension VLAlertData
             role: button.role.system,
             action:
             {
-             button.action()
              dismiss()
+             button.action()
             })
     }
              
