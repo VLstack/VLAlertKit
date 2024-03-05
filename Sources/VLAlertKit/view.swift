@@ -1,11 +1,17 @@
 import SwiftUI
 
+/// A view that presents an alert based on the provided data conforming to `VLAlertData`.
 struct VLAlertView<V, D>: View where V: View, D: VLAlertData
 {
  private let content: V
  @Binding private var data: D?
  @State private var isPresented: Bool = false
 
+ /// Initializes an alert view with the specified content and alert data binding.
+ ///
+ /// - Parameters:
+ ///   - content: The content of the alert view.
+ ///   - data: A binding to the alert
  init(content: V,
       data: Binding<D?>)
  {
@@ -39,6 +45,10 @@ struct VLAlertView<V, D>: View where V: View, D: VLAlertData
 
 extension View
 {
+ /// Presents an alert based on the provided alert data binding.
+ ///
+ /// - Parameter data: A binding to the alert data.
+ /// - Returns: A view presenting an alert based on the provided data.
  public func alert<D: VLAlertData>(with data: Binding<D?>) -> some View
  {
   VLAlertView(content: self, data: data)

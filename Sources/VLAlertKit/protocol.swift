@@ -1,15 +1,22 @@
 import Foundation
 import SwiftUI
 
+/// A protocol representing data for displaying an alert in SwiftUI.
 public protocol VLAlertData: Equatable
 {
+ /// The title of the alert, localized for internationalization support.
  var title: LocalizedStringKey { get }
+
+ /// The message body of the alert, localized for internationalization support.
  var message: LocalizedStringKey? { get }
+
+ /// The buttons to display in the alert.
  var buttons: [ VLAlertButton ] { get }
 }
 
 extension VLAlertData
 {
+ /// Determines whether the alert requires a cancel button based on its buttons configuration.
  fileprivate var requireCancelButton: Bool
  {
   let destructive = buttons.contains { $0.role == .destructive }
@@ -18,6 +25,10 @@ extension VLAlertData
   return destructive && !cancel
  }
  
+ /// Generates the content of the alert.
+ ///
+ /// - Parameter dismiss: A closure to dismiss the alert.
+ /// - Returns: A SwiftUI view representing the content of the alert.
  @ViewBuilder
  func content(dismiss: @escaping () -> Void) -> some View
  {
