@@ -1,7 +1,7 @@
 import SwiftUI
 
 /// Available roles for alert buttons
-public enum VLAlertButtonRole: Equatable
+@frozen public enum VLAlertButtonRole: Equatable, Sendable
 {
  /// The default role for an alert button.
  case `default`

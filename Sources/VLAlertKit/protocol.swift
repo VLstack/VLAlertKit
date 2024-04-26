@@ -2,7 +2,7 @@ import Foundation
 import SwiftUI
 
 /// A protocol representing data for displaying an alert in SwiftUI.
-public protocol VLAlertData: Equatable
+public protocol VLAlertData: Equatable, Sendable
 {
  /// The title of the alert, localized for internationalization support.
  var title: LocalizedStringKey { get }
