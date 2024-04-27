@@ -1,11 +1,6 @@
 import Foundation
 import SwiftUI
 
-public protocol VLAlertAction: Sendable
-{
- func onAction()
-}
-
 /// A protocol representing data for displaying an alert in SwiftUI.
 public protocol VLAlertData: Equatable, Sendable
 {
@@ -53,7 +48,7 @@ extension VLAlertData
             action:
             {
              dismiss()
-             button.action.onAction()
+             button.action()
             })
     }
              
