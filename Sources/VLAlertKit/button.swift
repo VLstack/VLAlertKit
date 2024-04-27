@@ -1,8 +1,11 @@
+import Foundation
 import SwiftUI
 
 /// Represents a button for use in alerts.
-public struct VLAlertButton
+public struct VLAlertButton: Identifiable
 {
+ public let id: String = UUID().uuidString
+
  /// The label for the button, localized for internationalization support.
  public let label: LocalizedStringKey
 
@@ -10,7 +13,7 @@ public struct VLAlertButton
  public let role: VLAlertButtonRole
 
  /// The action to perform when the button is tapped.
- public let action: () -> Void
+ public let action: any VLAlertAction
  
  /// Initializes an alert button with the specified label, role, and action.
  ///
@@ -20,7 +23,7 @@ public struct VLAlertButton
  ///   - action: The action to perform when the button is tapped. Defaults to an empty closure.
  public init(_ label: LocalizedStringKey,
              role: VLAlertButtonRole = .default,
-             action: @Sendable @escaping () -> Void = {})
+             action: any VLAlertAction)
  {
   self.label = label
   self.role = role
@@ -34,9 +37,9 @@ public struct VLAlertButton
  {
   switch role
   {
-   case .`default`: return .default(Text(label), action: action)
-   case .cancel: return .cancel(Text(label), action: action)
-   case .destructive: return .destructive(Text(label), action: action)
+   case .`default`: return .default(Text(label), action: action.onAction)
+   case .cancel: return .cancel(Text(label), action: action.onAction)
+   case .destructive: return .destructive(Text(label), action: action.onAction)
   }
  }
 }

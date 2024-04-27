@@ -1,6 +1,11 @@
 import Foundation
 import SwiftUI
 
+public protocol VLAlertAction: Sendable
+{
+ func onAction()
+}
+
 /// A protocol representing data for displaying an alert in SwiftUI.
 public protocol VLAlertData: Equatable, Sendable
 {
@@ -40,16 +45,15 @@ extension VLAlertData
   {
    Group
    {
-    ForEach(buttons.indices, id: \.self)
+    ForEach(buttons, id: \.id)
     {
-     index in
-     let button = buttons[index]
+     button in
      Button(button.label,
             role: button.role.system,
             action:
             {
              dismiss()
-             button.action()
+             button.action.onAction()
             })
     }
              
