@@ -23,7 +23,7 @@ public struct VLAlertButton: Identifiable
  ///   - action: The action to perform when the button is tapped. Defaults to an empty closure.
  public init(_ label: LocalizedStringKey,
              role: VLAlertButtonRole = .default,
-             action: @escaping @Sendable () async -> Void)
+             action: @escaping @Sendable () async -> Void = {})
  {
   self.label = label
   self.role = role
